@@ -1,0 +1,6 @@
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\bin\Debug\gms_pricer.exe.config
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\bin\Debug\gms_pricer.exe
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\bin\Debug\gms_pricer.pdb
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\obj\Debug\gms_pricer.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\obj\Debug\gms_pricer.exe
+C:\Users\admin\Documents\Visual Studio 2012\Projects\gms_pricer\gms_pricer\obj\Debug\gms_pricer.pdb
