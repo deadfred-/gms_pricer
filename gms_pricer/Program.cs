@@ -86,7 +86,7 @@ namespace gms_pricer
             HPPFile file = new HPPFile(@"C:\Users\admin\Documents\GitHub\BigTDayZEpoch\MPMissions\DayZ_Epoch_11_vp.Chernarus\Scripts\Trader_Items\Category\NeutralBlackMarketWeapons.hpp"); // TODO: Set up construct
             List<HPPCategory> cats = file.GetCategories();
             */
-            Console.ReadKey();
+            //Console.ReadKey();
 
 
         }

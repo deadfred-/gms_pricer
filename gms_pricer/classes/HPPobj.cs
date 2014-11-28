@@ -68,16 +68,15 @@ namespace gms_pricer.classes
                                       where l.LineText.Contains("Category")
                                      select l).ToList<HPPLine>();
 
+            /*
             // parse out our obj classes
             List<HPPLine> objLines = (from l in linesofFile
                                       where l.LineText.Contains("class") && (!l.LineText.Contains("Category"))
                                       select l).ToList<HPPLine>();
-
-            // parse out lines containing props
-            List<HPPLine> propLines = (from l in linesofFile
-                                       where l.LineText.Contains("type") || l.LineText.Contains("buy") || l.LineText.Contains("sell")
-                                       select l).ToList<HPPLine>();
-
+            */
+            
+            
+            
             
 
             // process our categories, objects, and props
@@ -89,6 +88,18 @@ namespace gms_pricer.classes
                 if (cat.ParseCategoryInformation(catLines, catLine.LineNumber))
                 {
                     //Console.WriteLine("Category: " + cat.CategoryName);
+                    // DEBUG:
+                    if (cat.CategoryName.Contains("700"))
+                    {
+                        Console.WriteLine("MONEYH CAT");
+                    }
+
+                    List<HPPLine> objLines = (from l in linesofFile
+                                where l.LineText.Contains("class") && (!l.LineText.Contains("Category")) && (l.LineNumber >= cat.StartLine)
+                                select l).ToList<HPPLine>();
+
+                    
+
                     foreach (HPPLine objLine in objLines)
                     {
                         HPPobj obj = new HPPobj();
@@ -101,6 +112,11 @@ namespace gms_pricer.classes
 
                             if (dupeObjects.Count <= 0)
                             {
+                                // parse out lines containing props
+                                List<HPPLine> propLines = (from l in linesofFile
+                                                           where l.LineText.Contains("type") || l.LineText.Contains("buy") || l.LineText.Contains("sell") && l.LineNumber >= obj.StartLine && l.LineNumber <= obj.LastLine
+                                                           select l).ToList<HPPLine>();
+
                                 // process props for obj
                                 obj.ParseObjProps(propLines);
 
@@ -185,7 +201,7 @@ namespace gms_pricer.classes
                                    select l).ToList<HPPLine>().First();
             this.StartLine = currentLine.LineNumber;
 
-            // failover for single class files
+            // failover for last cat in file or single cat files
             try
             {
                 HPPLine nextLine = (from l in CatLines

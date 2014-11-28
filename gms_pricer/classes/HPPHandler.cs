@@ -22,7 +22,7 @@ namespace gms_pricer.classes
         public bool SaveFilesToDisk ()
         {
             bool returnValue = true; // assume true
-            double priceModifier = 0.25;
+            double priceModifier = 0.30;
             double finalSellPrice = 0;
             double finalBuyPrice = 0;
 
@@ -44,6 +44,10 @@ namespace gms_pricer.classes
                             
                             foreach (HPPobj obj in cat.HPPItems)
                             {
+                                priceModifier = 0.30;
+                                if (obj.ClassName.Equals("BAF_Merlin_DZE"))
+                                    Console.WriteLine("MATCH");
+
                                 // write our items
                                 //class 30Rnd_556x45_StanagSD {
                                 string objStartLine = string.Format("\tclass {0} {{", obj.ClassName);
@@ -53,9 +57,24 @@ namespace gms_pricer.classes
                                 int price = obj.BuyPrice;                                
                                 if (file.FileName.Contains("Hero"))
                                 {
-                                    priceModifier = 0.20;
+                                    priceModifier = 0.25;
                                 }
-                                
+
+                                if (obj.Type.Equals("trade_weapons"))
+                                {
+                                    priceModifier = 0.12;
+                                }
+
+                                if (obj.ClassName.Equals("ItemBriefcase100oz") 
+                                    || obj.ClassName.Equals("ItemGoldBar") 
+                                    || obj.ClassName.Equals("ItemGoldBar10oz") 
+                                    || obj.ClassName.Equals("ItemSilverBar") 
+                                    || obj.ClassName.Equals("ItemSilverBar10oz") 
+                                    || obj.ClassName.Equals("ItemCopperBar10oz"))
+                                {
+                                    priceModifier = 1;
+                                }
+
                                 finalSellPrice = Convert.ToInt32(Math.Floor((double)price * priceModifier));
 
                                 // write out our props                                
